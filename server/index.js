@@ -20,7 +20,7 @@ app.post("/generate", async (req, res) => {
     const queryDescription = req.body.queryDescription;
     try{
         const sqlQuery = await generate(queryDescription);
-        res.json({ sqlQuery })
+        res.json({response: sqlQuery })
 
     }catch (err) {
         console.log(err);

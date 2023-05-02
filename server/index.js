@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import generate from "./generate.js";
 
 const app = express();
 
@@ -12,10 +13,20 @@ app.get("/", (req, res) => {
   res.send("Hello World from our API!");
 });
 
+
+
+
 app.post("/generate", async (req, res) => {
     const queryDescription = req.body.queryDescription;
-    console.log("received description: ",queryDescription);
-        res.json({response: `you sent this: ${queryDescription}`})
+    try{
+        const sqlQuery = await generate(queryDescription);
+        res.json({ sqlQuery })
+
+    }catch (err) {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+    }
+
 });
 
 app.listen(port, () => {

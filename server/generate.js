@@ -1,10 +1,10 @@
 import { response } from "express";
-import openaiClient from "./api";
+import openaiClient from "./api.js";
 
 const generate = async (queryDescription) => {
-    const gptResponse = await openaiClient.createCompletion({
+    const response = await openaiClient.createCompletion({
         model: "text-davinci-003",
-        prompt: `Convert the following SQL query into a natural language description:\n\n${queryDescription}.`,
+        prompt: `Convert the following natural language description into  a SQL query:\n\n${queryDescription}.`,
         max_tokens: 100, 
         temperature: 0
     })
